@@ -58,7 +58,7 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 
-\fancyhead[L]{Lecci\'{o}n 1}
+\fancyhead[L]{Lecci\'{o}n 5}
 %\fancyhead[L]{CNRS Competition 01-04}
 \fancyhead[R]{Jos\'{e} David Ruiz \'{A}lvarez}
 \fancyhead[C]{}
@@ -86,10 +86,11 @@
 %\begin{center}
 \noindent
 \begin{minipage}[b]{0.75\linewidth}
-{\LARGE\bf Lecci\'{o}n 1}\\ %[1mm]
+{\LARGE\bf Lecci\'{o}n 5}\\ %[1mm]
 %\end{center}
 %{\Large\bf \emph{}}\\ %[3mm]
-%{\Large\bf \emph{connections between LHC and neutrino experiments}}
+%{\Large\bf \emph{connections between LHC and neutrino experiments}}\\ %[3mm]
+%{\Large\bf \emph{from neutrons to Higgses}}\\ %[3mm]
 \large{Jos\'{e} David Ruiz \'{A}lvarez} \\
 \small{\href{mailto:josed.ruiz@udea.edu.co}{josed.ruiz@udea.edu.co}} \\ %[3mm]
 %\normalsize{Plaza código: 2017010307, Área: Física de fenomenología de altas energías} \\%[3mm]
@@ -109,92 +110,111 @@
 
 %\doublespacing
 
-\section{Contenido}
+\section{Funciones en C++}
 
-Dos grandes vertientes en t\'{e}rminos de problemas f\'{i}sicos: 
-\begin{itemize}
-\item Análisis estadístico de datos
-\item Solución numérica de ecuaciones diferenciales
-\end{itemize}
-
-En análisis de datos tendremos como objetivos específicos:
-\begin{itemize}
-\item Definición de un conjunto de datos 
-\item Preparación de un conjunto de datos para hacer una medida
-\item Visualización de un conjunto de datos
-\item Distribuciones de probabilidad
-\item Fit de un conjunto de datos a una función
-\item Medición de un observable
-\item Error en la medida
-\end{itemize}
-
-Con respecto a la solución numérica de ecuaciones diferenciales:
-\begin{itemize}
-\item Conceptos básicos de análisis numérico
-\item Problemas de valor inicial para ecuaciones diferenciales ordinarias
-\item Método de Euler
-\item Método de Runge-Kutta
-\item Errores de redondeo
-\item Consistencia, convergencia y estabilidad
-\end{itemize}
-
-\section{Evaluación}
+Toda función en C++ está definida por: Un tipo (``como'' los tipos de variables), un nombre, parámetros y el cuerpo. El tipo puede ser ``double'', ``float'', etc. Pero además hay algunos tipos especiales para funciones:
 
 \begin{itemize}
-\item 20\% seguimiento y tareas: Problemas cortos y ejercicios de programación.
-\item 30\% proyecto: Problema físico a resolver en grupos.
-\item 50\% dos parciales de igual valor. 
+\item void: Una función que no retorna ningún valor
+\item inline: Una función, muy corta, que no es estrictamente llamada pero que su código es insertado donde se llama.
 \end{itemize}
 
-\section{Otros}
-
-\begin{itemize}
-\item Lenguajes de programación: C(++) y python
-\item Paquetes: ROOT, numpy, matplotlib, entre otros.
-\item Git, Github
-\end{itemize}
-
-\section{Primeros pasos}
-
-Las tareas, seguimiento y proyecto deberán presentarse a través de un {\textbf{Pull request}} al repositorio central del curso: \url{https://github.com/jotadram6/CUFICO-2018-2}. Para empezar a trabajar con git y github es suficiente guiarse por los tutoriales:
-
-\begin{itemize}
-\item Acciones básicas en git: \url{http://rogerdudler.github.io/git-guide/}, hasta la sección {\textbf{pushing changes}}.
-\item Configurar git: \url{https://help.github.com/articles/set-up-git/}
-\item Pasos básicos en github: \url{https://help.github.com/articles/create-a-repo/}, \url{https://guides.github.com/activities/hello-world/}
-\item Haciendo una copia paralela personal ({\textbf{Fork}}) de un repositorio existente: \url{https://help.github.com/articles/fork-a-repo/}
-\item Para sincronizar un repositorio producto de un fork con respecto al repositorio original: Solo es necesario hacerlo una vez en la copia local del repositorio $\rightarrow$ \url{https://help.github.com/articles/configuring-a-remote-for-a-fork/}; acciones necesarias cada vez que haya que hacer la sincronización \url{https://help.github.com/articles/syncing-a-fork/}.
-\end{itemize}
-
-Hola mundo en C++. Primero se debe hacer el siguiente script, Hola.cpp:
+{\bf Ejemplo 1:}
 \begin{verbatim}
-/*
- * Encabezado describiendo el script, los autores y cualquier informacion relevante
- */
-#include <iostream>    // Para realizar operaciones de entrada y salida
-using namespace std;
- 
-int main() {                        // Inicio de la funcion main
-   cout << "Hola mundo" << endl;  // Imprime en patalla el texto hola mundo
-   return 0;                        // Termina la funcion main al retornar un valor
-}                                   // Final de la funcion main
+int SumaSimple(int a, int b) //int es el tipo de la funcion, SumaSimple su nombre, y a y b sus parámetros
+{
+//aqui empieza el cuerpo de la funcion
+int c = a+b;
+return c;
+//aqui termina el cuerpo de la funcion
+}
 \end{verbatim}
 
-Para compilar el script se debe ejecutar en una terminal:
+{\bf Ejemplo 2:}
 \begin{verbatim}
-g++ -o Hola Hola.cpp
+void PrintSumaSimple(int a, int b) 
+{
+int c = a+b;
+cout << c << endl;
+}
 \end{verbatim}
 
-Donde ``g++'' es el compilador, ``-o'' indica la opción ``output'' para especificar el nombre del ejecutable de salida, ``Hola'' es el nombre del ejecutable que se va a crear.
-
-Para ejecutar nuestro ejecutable solo debe ejecutarse el siguiente comando desde la terminal:
+{\bf Ejemplo 3:}
 \begin{verbatim}
-./Hola
+inline SumaSimpleI(int a, int b) 
+{
+return a+b;
+}
 \end{verbatim}
 
-{\textbf{Ejercicio 1:}} Remueva la línea ``using namespace std;'' de Hola.cpp. ¿Qué pasa cuando intentamos compilar?, ¿Cómo podemos arreglarlo?
+Los parámetros de una función en C++ pueden ser pasados a una función por su valor o por su referencia, en el primer caso la función se evalúa sobre los valores que le son entregados, en el segundo caso la función se evalúa sobre los valores que tienen las referencias que le son entregadas, además si la variable que es entregada por referencia cambia de algún modo dentro de la función el cambioes visible también afuera de la función.
 
-{\textbf{Ejercicio 2:}} Después de terminar el ejercicio 1, haga un pull request con su script Hola.cpp al repositorio central del curso en la carpeta Ejercicio\_Leccion1.
+{\bf Ejemplo 4:}
+\begin{verbatim}
+void SumaAlPrimero(float &a, float b) 
+{
+  a = a+b;
+}
+\end{verbatim}
+
+{\bf Ejercicio 1:} Consultar la definición de protofunciones y la utilización de funciones por recursividad.
+
+\section{Clases}
+\subsection{Estructuras de datos}
+
+Las estructuras de datos permiten conjugar o combinar en un solo objeto diferentes tipos de variables. Las estructuras de datos podemos pensarlas como el tipo más simple de clases en C++.
+
+{\bf Ejemplo 5:}
+\begin{verbatim}
+struct PosicionYCarga
+{
+int Carga;
+float X;
+float Y;
+float Z;
+} Particula1, Particula2;
+\end{verbatim}
+
+\subsection{Clases}
+
+La diferencia fundamental entre una estructura de datos y una clase es que esta última puede contener funciones. Además, dentro de una clase se pueden especificar los permisos de acceso a las componentes de la clase. El acceso a diferentes elementos de la clase puede ser público, privado o protegido. Cuando es público el acceso puede hacerse desde cualquier lugar donde el objeto de la clase sea visible. El acceso privado restringe el acceso a otros miembros dentro de la misma clase. Y el acceso protegido se restringe a miembros de la misma clase y clases derivadas.
+
+{\bf Ejemplo 6:}
+\begin{verbatim}
+class Particle
+{
+public:
+  int Carga;
+  float X,Y,Z;
+  float VX, VY, VZ;
+  float M;
+  void SetValues(float,float,float,float,float,float,float,int);
+  float Pos_evol(float,float,float,float);
+  //void time_slice_print();
+} P1, P2;
+
+void Particle::SetValues(float x,float y,float z,float vx,float vy,float vz,float m,int Car)
+{
+  X=x;
+  Y=y;
+  Z=z;
+  VX=vx;
+  VY=vy;
+  VZ=vz;
+  M=m;
+  Carga=Car;
+}
+
+float Particle::Pos_evol(float ax, float ay, float az, float t)
+{
+X=X+(VX*t)+(0.5*ax*(t*t));
+Y=Y+(VY*t)+(0.5*ay*(t*t));
+Z=Z+(VZ*t)+(0.5*az*(t*t));
+}
+\end{verbatim}
+
+{\bf Ejercicio 2:} Repita el ejercicio de clases con Python en C++.
+
 
 %\begin{center}
 %\includegraphics[width=0.4\linewidth]{DM_detection.jpg}
